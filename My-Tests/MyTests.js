@@ -1,4 +1,4 @@
-
+//---
 // Synchronous way to read and write file
 const fs = require('fs');
 const textIn = fs.readFileSync('./txt/MyFile.txt', 'utf-8');
@@ -21,4 +21,5 @@ fs.readFile('./txt/start.txt', 'utf-8', (err, startFileName) => {
 });
 
 console.log('will read file!');
+//---
 
