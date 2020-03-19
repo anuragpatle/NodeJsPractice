@@ -80,7 +80,13 @@ const products = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
  
-  const pathname = req.url;
+  // In order to parse query into an object we pass 'ture' here
+  // What is query?
+  // Ans. /product?id=2. In this example "id=2" is query query string.
+  const {query, pathname} = url.parse(req.url, true);
+  
+  console.log(query);
+  console.log(pathname);
 
   // Overview page
   if (pathname === '/' || pathname === '/overview') {
@@ -102,8 +108,11 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, {
       'Content-type': 'text/html'
     });
+    
+    const selectedProduct = products[query.id];
+    const output = replaceTemplate(tempProduct, selectedProduct);
 
-    res.end('Product page');
+    res.end(output);
 
   // Api
   } else if (pathname === '/api') {
